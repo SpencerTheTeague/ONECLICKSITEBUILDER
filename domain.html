@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Package – OneClickSiteBuilder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <a href="index.html" class="back-link">← Back to Main Page</a>
+      
+      <h1>Premium Domain Package – $499.99</h1>
+      <p>Complete website solution with domain, hosting, and professional setup</p>
+      
+      <div class="plan-features">
+        <ul>
+          <li>✓ Everything in Premium Plan</li>
+          <li>✓ Domain registration included</li>
+          <li>✓ 1 year hosting on Netlify</li>
+          <li>✓ Professional email setup</li>
+          <li>✓ Complete technical configuration</li>
+          <li>✓ Ready-to-use professional website</li>
+        </ul>
+      </div>
+
+      <h2>Customer Information</h2>
+      <form id="domainOrderForm">
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name"
+            placeholder="e.g., John Smith" 
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            placeholder="you@example.com" 
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number *</label>
+          <input 
+            type="tel" 
+            id="phone" 
+            name="phone"
+            placeholder="(555) 123-4567" 
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="address">Street Address *</label>
+          <input 
+            type="text" 
+            id="address" 
+            name="address"
+            placeholder="123 Main Street" 
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="city">City *</label>
+          <input 
+            type="text" 
+            id="city" 
+            name="city"
+            placeholder="New York" 
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="state">State/Province *</label>
+          <input 
+            type="text" 
+            id="state" 
+            name="state"
+            placeholder="NY" 
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="zip">ZIP/Postal Code *</label>
+          <input 
+            type="text" 
+            id="zip" 
+            name="zip"
+            placeholder="10001" 
+            required
+          />
+        </div>
+
+        <h2>Website & Domain Information</h2>
+
+        <div class="form-group">
+          <label for="businessName">Business/Project Name *</label>
+          <input 
+            type="text" 
+            id="businessName" 
+            name="businessName"
+            placeholder="e.g., Acme Co." 
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="domain">Desired Domain Name *</label>
+          <input 
+            type="text" 
+            id="domain" 
+            name="domain"
+            placeholder="e.g., acmeco.com" 
+            required
+          />
+          <small>We'll check availability and suggest alternatives if needed</small>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description of Your Website *</label>
+          <textarea 
+            id="description" 
+            name="description"
+            placeholder="Describe what your website should include and its purpose"
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="colors">Preferred Colors</label>
+          <input 
+            type="text" 
+            id="colors" 
+            name="colors"
+            placeholder="e.g., Blue & white, or modern dark theme"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="content">Content Details</label>
+          <textarea 
+            id="content" 
+            name="content"
+            placeholder="Any specific content, text, or information you want included"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="features">Special Features</label>
+          <textarea 
+            id="features" 
+            name="features"
+            placeholder="Any special functionality or features you need"
+          ></textarea>
+        </div>
+
+        <h2>Add Edit Credits (Optional)</h2>
+
+        <div class="form-group">
+          <label for="editCredits">Extra Edit Credits ($10 each)</label>
+          <input 
+            type="number" 
+            id="editCredits" 
+            name="editCredits" 
+            value="0" 
+            min="0" 
+            max="50"
+          />
+        </div>
+
+        <div class="order-total">
+          <h3>Order Total: <span id="orderTotal">$499.99</span></h3>
+        </div>
+
+        <button type="button" class="btn-submit" id="submitButton" onclick="startOrder('domain')">
+          Submit Domain Package – $499.99
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
