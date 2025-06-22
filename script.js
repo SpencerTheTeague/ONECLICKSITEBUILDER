@@ -1,5 +1,5 @@
 // OneClickSiteBuilder - Unified Script (Patch Plan v1.1)
-const BACKEND = 'https://5002-iiblxxu8kfn4b3g7cndpb-b71d04c4.manusvm.computer';
+const BACKEND = ".netlify/functions";
 const stripe = Stripe('pk_live_51RY9PVRvugzB60pNk0vkzEWmNxPLho26Bdzpyw9H50Jw9rHxNXytfLBKw9h8G7GoxVq3Vrtmv43fg51SD6tYNPGg00cDpygKKM');
 
 function collectFormData(plan) {

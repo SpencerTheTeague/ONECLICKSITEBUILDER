@@ -53,28 +53,27 @@ def create_checkout_session():
                 },
                 'quantity': credits
             })
-        
         session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            mode='payment',
+            payment_method_types=["card"],
+            mode="payment",
             line_items=line_items,
-            success_url='https://your-domain.com/success.html?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url='https://your-domain.com/#pricing',
-            customer_email=data.get('email'),
+            success_url="https://wqpkczkv.manus.space/success.html?session_id={CHECKOUT_SESSION_ID}",
+            cancel_url="https://wqpkczkv.manus.space/#pricing",
+            customer_email=data.get("email"),
             metadata={
-                'order_type': plan,
-                'editCredits': credits,
-                'name': data.get('name'),
-                'phone': data.get('phone'),
-                'address': data.get('address'),
-                'city': data.get('city'),
-                'state': data.get('state'),
-                'zip': data.get('zip'),
-                'businessName': data.get('businessName'),
-                'description': data.get('description')
-            }
+                "order_type": plan,
+                "editCredits": credits,
+                "name": data.get("name"),
+                "phone": data.get("phone"),
+                "address": data.get("address"),
+                "city": data.get("city"),
+                "state": data.get("state"),
+                "zip": data.get("zip"),
+                "businessName": data.get("businessName"),
+                "description": data.get("description"),
+            },
         )
-        
+
         # Log order details for staff
         print(f"""
         ==========================================
@@ -85,34 +84,35 @@ def create_checkout_session():
         EDIT CREDITS: {credits}
         
         CUSTOMER INFORMATION:
-        Name: {data.get('name', 'N/A')}
-        Email: {data.get('email', 'N/A')}
-        Phone: {data.get('phone', 'N/A')}
+        Name: {data.get("name", "N/A")}
+        Email: {data.get("email", "N/A")}
+        Phone: {data.get("phone", "N/A")}
         
         ADDRESS:
-        Street: {data.get('address', 'N/A')}
-        City: {data.get('city', 'N/A')}
-        State: {data.get('state', 'N/A')}
-        ZIP: {data.get('zip', 'N/A')}
+        Street: {data.get("address", "N/A")}
+        City: {data.get("city", "N/A")}
+        State: {data.get("state", "N/A")}
+        ZIP: {data.get("zip", "N/A")}
         
         BUSINESS INFORMATION:
-        Business Name: {data.get('businessName', 'N/A')}
-        Description: {data.get('description', 'N/A')}
+        Business Name: {data.get("businessName", "N/A")}
+        Description: {data.get("description", "N/A")}
         
         STRIPE SESSION ID: {session.id}
         ==========================================
         """)
         
-        return jsonify({'id': session.id})
+        return jsonify({"id": session.id})
         
     except Exception as e:
         print(f"Error creating checkout session: {str(e)}")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({"error": str(e)}), 500
 
-@app.route('/health', methods=['GET'])
+@app.route("/health", methods=["GET"])
 def health_check():
-    return jsonify({'status': 'healthy'})
+    return jsonify({"status": "healthy"})
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5002, debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5002, debug=True)
+
 
