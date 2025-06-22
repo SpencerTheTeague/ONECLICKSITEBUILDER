@@ -1,105 +1,105 @@
-<!-- script.js  (replace the whole file with everything below) -->
-<script>
-/* 1 – Stripe publishable key  ────────────────────────────────
-   ▸ TEST mode:  pk_test_…
-   ▸ When you’re ready for real payments, switch it back to
-     your pk_live_… key and redeploy.                         */
-const stripe = Stripe('pk_test_REPLACE_WITH_YOUR_KEY');
+// ──────────────────────────────────────────────────────────────
+//  Stripe checkout + Formspree submission (TEST MODE)
+//  ONECLICKSITEBUILDER – copy entire file as-is, no <script> tags
+// ──────────────────────────────────────────────────────────────
 
-/* 2 – Path to the Netlify Function that creates sessions */
-const BACKEND = '.netlify/functions';
+// 1.  Keys & endpoints
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_51RY9PVRvugzB60pNyBkNHZFpVqFhQ3U0zKKEy3IupIXj9KDyHLTUpGw4ZmzOj6E0X1M4Ri1NGZ1QnF4X3VbZsgTh00iB1j2l4v'; // ← change to pk_live_… when ready
+const FORM_ENDPOINT          = 'https://formspree.io/f/xvgrzrvg';
+const BACKEND_FUNCTION       = '.netlify/functions/create-checkout-session';
 
-/* 3 – Collect the form data that’s on the page */
-function collectFormData (plan) {
+const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+
+// 2.  Grab data from the order form
+function collectFormData(plan) {
+  const val = id => document.getElementById(id)?.value?.trim() || '';
   return {
-    type: plan,
-    editCredits: parseInt(document.getElementById('editCredits')?.value || 0, 10),
-    name:          document.getElementById('name')?.value || '',
-    email:         document.getElementById('email')?.value || '',
-    phone:         document.getElementById('phone')?.value || '',
-    address:       document.getElementById('address')?.value || '',
-    city:          document.getElementById('city')?.value || '',
-    state:         document.getElementById('state')?.value || '',
-    zip:           document.getElementById('zip')?.value || '',
-    businessName:  document.getElementById('businessName')?.value || '',
-    description:   document.getElementById('description')?.value || ''
+    type:         plan,
+    editCredits:  parseInt(val('editCredits') || '0', 10),
+    name:         val('name'),
+    email:        val('email'),
+    phone:        val('phone'),
+    address:      val('address'),
+    city:         val('city'),
+    state:        val('state'),
+    zip:          val('zip'),
+    businessName: val('businessName'),
+    description:  val('description')
   };
 }
 
-/* 4 – Kick off the order + redirect to Stripe Checkout */
-async function startOrder (plan) {
-  const payload = collectFormData(plan);
+// 3.  Main button handler
+async function startOrder(plan) {
+  const data = collectFormData(plan);
 
-  // Validation
-  if (plan === 'credits' && payload.editCredits === 0) {
-    alert('Please select at least 1 edit credit for credits-only orders.');
-    return;
+  /* ─── simple front-end checks ─── */
+  if (plan === 'credits' && data.editCredits < 1) {
+    alert('Credits-only orders need at least 1 credit.'); return;
   }
-  if (['basic','premium'].includes(plan) && payload.editCredits === 0) {
-    if (!confirm('Almost every site needs tweaks. We recommend at least 2 credits. Continue without extras?')) {
-      return;
-    }
+  if (['basic','premium'].includes(plan) && data.editCredits === 0) {
+    if (!confirm('Almost every site needs tweaks – we recommend at least 2 credits. Continue without extras?')) return;
   }
 
   try {
-    const res = await fetch(`${BACKEND}/create-checkout-session`, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload)
+    /* 3-A  Send form to Formspree first (so you always get the e-mail) */
+    const fsRes = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify(data)
     });
+    if (!fsRes.ok) throw new Error('Form submission failed – please try again.');
 
-    const json = await res.json();
-    if (json.error) { alert('Error: ' + json.error); return; }
+    /* 3-B  Ask Netlify Function for a Stripe Checkout session */
+    const nfRes = await fetch(BACKEND_FUNCTION, {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json' },
+      body: JSON.stringify(data)
+    });
+    const nfJson = await nfRes.json();
+    if (nfJson.error || !nfJson.id) throw new Error('Payment session error: ' + (nfJson.error || 'unknown'));
 
-    // Success → send the browser to Stripe
-    stripe.redirectToCheckout({ sessionId: json.id });
+    /* 3-C  Redirect to Stripe */
+    await stripe.redirectToCheckout({ sessionId: nfJson.id });
 
   } catch (err) {
     console.error(err);
-    alert('An error occurred. Please try again.');
+    alert(err.message || 'Unexpected error – please try again.');
   }
 }
 
-/* 5 – Navigation helpers */
-function selectPlan (plan)    { window.location.href = `${plan}.html`; }
-function selectDomainPackage(){ window.location.href = 'domain.html'; }
-function purchaseEditCredits(){ window.location.href = 'credits.html'; }
+// 4.  Helper to change pages
+function selectPlan(type){ location.href = `${type}.html`; }
+function selectDomainPackage(){ location.href = 'domain.html'; }
+function purchaseEditCredits(){ location.href = 'credits.html'; }
 
-/* 6 – Price total updater */
-function updateTotal () {
-  const editCredits = parseInt(document.getElementById('editCredits')?.value || 0, 10);
-  const totalEl     = document.getElementById('orderTotal');
-  const button      = document.getElementById('submitButton');
-  if (!totalEl || !button) return;
+// 5.  Live price calculator
+function updateTotal() {
+  const credits    = parseInt(document.getElementById('editCredits')?.value || '0', 10);
+  const totalEl    = document.getElementById('orderTotal');
+  const submitBtn  = document.getElementById('submitButton');
+  if (!totalEl || !submitBtn) return;
 
-  // Base price by page
   let base = 0;
   if (location.pathname.includes('basic.html'))   base =  29.99;
   if (location.pathname.includes('premium.html')) base =  99.99;
   if (location.pathname.includes('domain.html'))  base = 499.99;
 
-  const total = base + editCredits * 10;
+  const total = base + credits * 10;
   totalEl.textContent = `$${total.toFixed(2)}`;
 
-  // Button text
-  if (location.pathname.includes('basic.html'))
-    button.textContent = `Submit Basic Order – $${total.toFixed(2)}`;
-  else if (location.pathname.includes('premium.html'))
-    button.textContent = `Submit Premium Order – $${total.toFixed(2)}`;
-  else if (location.pathname.includes('domain.html'))
-    button.textContent = `Submit Domain Package – $${total.toFixed(2)}`;
-  else
-    button.textContent = `Purchase ${editCredits} Edit Credits – $${total.toFixed(2)}`;
+  const label = location.pathname.includes('basic.html')   ? 'Submit Basic Order'   :
+                location.pathname.includes('premium.html') ? 'Submit Premium Order' :
+                location.pathname.includes('domain.html')  ? 'Submit Domain Package':
+                                                             `Purchase ${credits} Edit Credits`;
+  submitBtn.textContent = `${label} – $${total.toFixed(2)}`;
 }
 
-/* 7 – Run on page load */
+// 6.  Initialise listeners after page load
 document.addEventListener('DOMContentLoaded', () => {
-  const creditsInput = document.getElementById('editCredits');
-  if (creditsInput) {
-    creditsInput.addEventListener('input',  updateTotal);
-    creditsInput.addEventListener('change', updateTotal);
+  const crInput = document.getElementById('editCredits');
+  if (crInput){
+    crInput.addEventListener('input',  updateTotal);
+    crInput.addEventListener('change', updateTotal);
     updateTotal();
   }
 });
-</script>
-
