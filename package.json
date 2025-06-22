@@ -1,0 +1,8 @@
+{
+  "name": "oneclicksitebuilder",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "stripe": "^12.15.0"
+  }
+}
