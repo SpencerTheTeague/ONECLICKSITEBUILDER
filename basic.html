@@ -1,175 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Plan – OneClickSiteBuilder</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Website Package – OneClickSiteBuilder</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Load Stripe’s Buy-Button library -->
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="form-container">
-      <a href="index.html" class="back-link">← Back to Main Page</a>
-      
-      <h1>Basic Plan – $29.99</h1>
-      <p>Simple website with essential information and professional styling</p>
-      
-      <div class="plan-features">
-        <ul>
-          <li>✓ 2 free edits included</li>
-          <li>✓ Delivered as ZIP + active website address + link</li>
-          <li>✓ Perfect for basic business presence</li>
-        </ul>
-      </div>
+  <header class="site-header">
+    <h1>OneClickSiteBuilder</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="basic.html" class="active">Basic</a>
+      <a href="premium.html">Premium</a>
+      <a href="domain.html">Domain</a>
+      <a href="credits.html">Edit Credits</a>
+    </nav>
+  </header>
 
-      <h2>Customer Information</h2>
-      <form id="basicOrderForm">
-        <div class="form-group">
-          <label for="name">Full Name *</label>
-          <input 
-            type="text" 
-            id="name" 
-            name="name"
-            placeholder="e.g., John Smith" 
-            required
-          />
-        </div>
+  <main class="plan-page">
+    <h2>Basic Website Package</h2>
+    <p>Get a professional website built for you—for just <strong>$29.99</strong>.</p>
+    
+    <!-- Your Basic-Tier Buy Button -->
+    <stripe-buy-button
+      buy-button-id="buy_btn_1RdJgURvugzB60pNfhyunIhp"
+      publishable-key="pk_live_51RY9PVRvugzB60pNk0vkzEWmNxPLho26Bdzpyw9H50Jw9rHxNXytfLBKw9h8G7GoxVq3Vrtmv43fg51SD6tYNPGg00cDpygKKM"
+    ></stripe-buy-button>
+  </main>
 
-        <div class="form-group">
-          <label for="email">Email Address *</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email"
-            placeholder="you@example.com" 
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="phone">Phone Number *</label>
-          <input 
-            type="tel" 
-            id="phone" 
-            name="phone"
-            placeholder="(555) 123-4567" 
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="address">Street Address *</label>
-          <input 
-            type="text" 
-            id="address" 
-            name="address"
-            placeholder="123 Main Street" 
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="city">City *</label>
-          <input 
-            type="text" 
-            id="city" 
-            name="city"
-            placeholder="New York" 
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="state">State/Province *</label>
-          <input 
-            type="text" 
-            id="state" 
-            name="state"
-            placeholder="NY" 
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="zip">ZIP/Postal Code *</label>
-          <input 
-            type="text" 
-            id="zip" 
-            name="zip"
-            placeholder="10001" 
-            required
-          />
-        </div>
-
-        <h2>Website Information</h2>
-
-        <div class="form-group">
-          <label for="businessName">Business/Project Name *</label>
-          <input 
-            type="text" 
-            id="businessName" 
-            name="businessName"
-            placeholder="e.g., Acme Co." 
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="description">Description of Your Website *</label>
-          <textarea 
-            id="description" 
-            name="description"
-            placeholder="Describe what your website should include and its purpose"
-            required
-          ></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="colors">Preferred Colors</label>
-          <input 
-            type="text" 
-            id="colors" 
-            name="colors"
-            placeholder="e.g., Blue & white, or modern dark theme"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="content">Content Details</label>
-          <textarea 
-            id="content" 
-            name="content"
-            placeholder="Any specific content, text, or information you want included"
-          ></textarea>
-        </div>
-
-        <h2>Add Edit Credits (Optional)</h2>
-
-        <div class="form-group">
-          <label for="editCredits">Extra Edit Credits ($10 each)</label>
-          <input 
-            type="number" 
-            id="editCredits" 
-            name="editCredits" 
-            value="0" 
-            min="0" 
-            max="50"
-          />
-        </div>
-
-        <div class="order-total">
-          <h3>Order Total: <span id="orderTotal">$29.99</span></h3>
-        </div>
-
-        <button type="button" class="btn-submit" id="submitButton" onclick="startOrder('basic')">
-          Submit Basic Order – $29.99
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <script src="https://js.stripe.com/v3/"></script>
-  <script src="script.js"></script>
+  <footer class="site-footer">
+    <p>&copy; 2025 OneClickSiteBuilder. All rights reserved.</p>
+  </footer>
 </body>
 </html>
-
