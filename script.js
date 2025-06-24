@@ -217,4 +217,3 @@ function purchaseEditCredits() {
     window.location.href = "edit-credits.html";
 }
 
-
