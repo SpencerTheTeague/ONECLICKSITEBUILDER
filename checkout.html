@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - OneClickSiteBuilder</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        .checkout-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .order-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .order-summary h2 {
+            margin: 0 0 15px 0;
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .order-details {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 10px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .payment-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .payment-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .customer-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .customer-info .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .customer-info label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .customer-info input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .customer-info input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        #card-element {
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            background: white;
+            margin-bottom: 20px;
+        }
+        
+        #card-element.StripeElement--focus {
+            border-color: #667eea;
+        }
+        
+        #card-errors {
+            color: #fa755a;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .pay-button {
+            width: 100%;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+            transform: translateY(-2px);
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .pay-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(76, 175, 80, 0.4);
+        }
+        
+        .pay-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .back-link:hover {
+            color: #764ba2;
+        }
+        
+        @media (max-width: 768px) {
+            .customer-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkout-container {
+                margin: 10px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-container">
+        <a href="javascript:history.back()" class="back-link">← Back to Order Form</a>
+        
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div class="order-details">
+                <div class="order-item">
+                    <span id="plan-name">Loading...</span>
+                    <span id="plan-price">$0.00</span>
+                </div>
+                <div class="order-item">
+                    <span>Total</span>
+                    <span id="total-price">$0.00</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="payment-section">
+            <h3>Payment Information</h3>
+            
+            <form id="payment-form">
+                <div class="customer-info">
+                    <div class="form-group">
+                        <label for="customer-name">Full Name*</label>
+                        <input type="text" id="customer-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-email">Email Address*</label>
+                        <input type="email" id="customer-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-phone">Phone Number*</label>
+                        <input type="tel" id="customer-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-address">Billing Address</label>
+                        <input type="text" id="customer-address" placeholder="Street Address">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="card-element">Credit or Debit Card*</label>
+                    <div id="card-element">
+                        <!-- Stripe Elements will create form elements here -->
+                    </div>
+                    <div id="card-errors" role="alert"></div>
+                </div>
+                
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Processing your payment...</p>
+                </div>
+                
+                <button type="submit" id="submit-payment" class="pay-button">
+                    Complete Payment
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Stripe
+        const stripe = Stripe('pk_live_51RY9PVRvugzB60pNk0vkzEWmNxPLho26Bdzpyw9H50Jw9rHxNXytfLBKw9h8G7GoxVq3Vrtmv43fg51SD6tYNPGg00cDpygKKM'); // Use your live publishable key
+        const elements = stripe.elements();
+        
+        // Create card element
+        const cardElement = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#424770',
+                    '::placeholder': {
+                        color: '#aab7c4',
+                    },
+                },
+            },
+        });
+        
+        cardElement.mount('#card-element');
+        
+        // Handle real-time validation errors from the card Element
+        cardElement.on('change', ({error}) => {
+            const displayError = document.getElementById('card-errors');
+            if (error) {
+                displayError.textContent = error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+        
+        // Load order data from URL parameters or localStorage
+        function loadOrderData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const plan = urlParams.get('plan') || localStorage.getItem('selectedPlan') || 'basic';
+            const orderData = JSON.parse(localStorage.getItem('orderData') || '{}');
+            
+            let planName, planPrice, amount;
+            switch(plan) {
+                case 'basic':
+                    planName = 'Basic Plan';
+                    planPrice = '$29.99';
+                    amount = 2999; // Amount in cents
+                    break;
+                case 'premium':
+                    planName = 'Premium Plan';
+                    planPrice = '$99.99';
+                    amount = 9999; // Amount in cents
+                    break;
+                case 'domain':
+                    planName = 'Premium Domain & Complete Website Package';
+                    planPrice = '$499.99';
+                    amount = 49999; // Amount in cents
+                    break;
+                case 'edit-credits':
+                    planName = 'Edit Credits';
+                    const credits = parseInt(orderData.credits || '0', 10);
+                    amount = credits * 1000; // $10 per credit
+                    planPrice = `$${(amount / 100).toFixed(2)}`;
+                    break;
+                default:
+                    planName = 'Basic Plan';
+                    planPrice = '$29.99';
+                    amount = 2999;
+            }
+            
+            document.getElementById('plan-name').textContent = planName;
+            document.getElementById('plan-price').textContent = planPrice;
+            document.getElementById('total-price').textContent = planPrice;
+            
+            // Pre-fill customer info if available
+            if (orderData.name) document.getElementById('customer-name').value = orderData.name;
+            if (orderData.email) document.getElementById('customer-email').value = orderData.email;
+            if (orderData.phone) document.getElementById('customer-phone').value = orderData.phone;
+        }
+        
+        // Handle form submission
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            const submitButton = document.getElementById('submit-payment');
+            const loading = document.querySelector('.loading');
+            
+            submitButton.disabled = true;
+            loading.style.display = 'block';
+            
+            // Get customer information
+            const customerName = document.getElementById('customer-name').value;
+            const customerEmail = document.getElementById('customer-email').value;
+            const customerPhone = document.getElementById('customer-phone').value;
+            
+            if (!customerName || !customerEmail || !customerPhone) {
+                alert('Please fill in all required fields');
+                submitButton.disabled = false;
+                loading.style.display = 'none';
+                return;
+            }
+            
+            try {
+                // Retrieve order data from localStorage
+                const orderData = JSON.parse(localStorage.getItem('orderData') || '{}');
+                const selectedPlan = localStorage.getItem('selectedPlan');
+
+                // Create a PaymentIntent on your server
+                const response = await fetch('/.netlify/functions/create-payment-intent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: parseFloat(document.getElementById('total-price').textContent.replace('$', '')) * 100, // Convert to cents
+                        currency: 'usd',
+                        paymentMethodType: 'card',
+                        customerName: customerName,
+                        customerEmail: customerEmail,
+                        customerPhone: customerPhone,
+                        orderData: orderData,
+                        selectedPlan: selectedPlan
+                    }),
+                });
+
+                const { clientSecret, error: backendError } = await response.json();
+
+                if (backendError) {
+                    document.getElementById('card-errors').textContent = backendError.message;
+                    submitButton.disabled = false;
+                    loading.style.display = 'none';
+                    return;
+                }
+
+                // Confirm the card payment
+                const { paymentIntent, error: stripeError } = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            name: customerName,
+                            email: customerEmail,
+                            phone: customerPhone,
+                        },
+                    },
+                });
+
+                if (stripeError) {
+                    document.getElementById('card-errors').textContent = stripeError.message;
+                    submitButton.disabled = false;
+                    loading.style.display = 'none';
+                    return;
+                }
+
+                if (paymentIntent.status === 'succeeded') {
+                    // Payment succeeded, now send data to Formspree
+                    const formspreeEndpoint = 'https://formspree.io/f/YOUR_FORMSPREE_FORM_ID'; // Replace with your Formspree form ID
+                    const emailSubject = `New Order: ${selectedPlan.toUpperCase()} Plan`;
+                    let emailBody = `
+                        Plan: ${selectedPlan.toUpperCase()}
+                        Customer Name: ${customerName}
+                        Customer Email: ${customerEmail}
+                        Customer Phone: ${customerPhone}
+                        Total Paid: ${document.getElementById('total-price').textContent}
+                    `;
+
+                    if (selectedPlan === 'edit-credits') {
+                        emailBody += `\nCredits Purchased: ${orderData.credits}\n`;
+                        if (orderData.existingWebsite) {
+                            emailBody += `Existing Website: ${orderData.existingWebsite}\n`;
+                        }
+                        if (orderData.notes) {
+                            emailBody += `Notes: ${orderData.notes}\n`;
+                        }
+                        if (orderData.originalEmail) {
+                            emailBody += `Original Purchase Email: ${orderData.originalEmail}\n`;
+                        }
+                    } else {
+                        // Add all other form data for basic/premium/domain plans
+                        for (const key in orderData) {
+                            if (orderData.hasOwnProperty(key) && key !== 'paymentMethod' && key !== 'customerName' && key !== 'customerEmail' && key !== 'customerPhone' && key !== 'paymentCompleted' && key !== 'orderDate') {
+                                emailBody += `${key.charAt(0).toUpperCase() + key.slice(1)}: ${orderData[key]}\n`;
+                            }
+                        }
+                    }
+
+                    await fetch(formspreeEndpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            _subject: emailSubject,
+                            message: emailBody
+                        })
+                    });
+
+                    // Redirect to success page
+                    window.location.href = 'success.html';
+                } else {
+                    // Handle other payment statuses (e.g., 'requires_action')
+                    document.getElementById('card-errors').textContent = 'Payment ' + paymentIntent.status;
+                    submitButton.disabled = false;
+                    loading.style.display = 'none';
+                }
+
+            } catch (err) {
+                console.error('Payment error:', err);
+                document.getElementById('card-errors').textContent = 'An error occurred processing your payment. Please try again.';
+                submitButton.disabled = false;
+                loading.style.display = 'none';
+            }
+        });
+        
+        // Load order data when page loads
+        document.addEventListener('DOMContentLoaded', loadOrderData);
+    </script>
+</body>
+</html>
+
