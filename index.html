@@ -1,74 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OneClickSiteBuilder – Professional Web Solutions</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneClickSiteBuilder – Professional Web Solutions</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-slate-50 text-gray-800">
-  <!-- Site header -------------------------------------------------------->
-  <header class="bg-gradient-to-r from-indigo-700 to-sky-600 shadow-md sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
-      <img src="rocket-logo-with-orbit.png" alt="Logo" class="w-10 h-10" />
-      <div>
-        <h1 class="text-xl font-bold text-white leading-5">OneClickSiteBuilder</h1>
-        <p class="text-xs text-indigo-200 -mt-1">Professional Web Solutions</p>
-      </div>
+<body>
+  <!-- ────────────────── Header ────────────────── -->
+  <header class="site-header">
+    <div class="container flex items-center gap-4 py-4">
+      <img src="rocket-logo-with-orbit.png" alt="Logo" class="h-10 w-auto" />
+      <h1 class="text-2xl font-bold">OneClickSiteBuilder</h1>
+      <span class="subtitle text-sm text-slate-500">Professional Web Solutions</span>
     </div>
   </header>
 
-  <!-- Hero / package grid ---------------------------------------------->
-  <main class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-center text-3xl font-extrabold mb-10">Choose Your Package</h2>
+  <!-- ────────────────── Hero / Plans ───────────── -->
+  <main class="container py-12">
+    <h2 class="text-center text-3xl font-semibold mb-8">Choose Your Package</h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Basic ---------------------------------------------------------->
-      <a href="basic.html" class="group block rounded-xl border-2 border-green-500/30 hover:border-green-500 transition p-6 bg-white shadow-sm">
-        <h3 class="text-center text-2xl font-bold mb-2">Basic</h3>
-        <p class="text-center text-4xl font-extrabold text-indigo-600 mb-4">$29.99</p>
-        <ul class="space-y-2 text-sm mb-6">
-          <li>✓ 2 free edits included</li>
-          <li>✓ Delivered as ZIP + active site link</li>
-          <li>✓ Perfect for a basic business presence</li>
+    <div class="grid gap-8 md:grid-cols-3">
+      <!-- Basic Plan -->
+      <article class="plan-card border-green-500">
+        <h3 class="plan-title">Basic</h3>
+        <p class="plan-price">$29.99</p>
+        <ul class="plan-features">
+          <li>✓ 2 free edits included</li>
+          <li>✓ Delivered as ZIP + active site link</li>
+          <li>✓ Perfect for a basic business presence</li>
         </ul>
-        <button class="w-full py-3 rounded bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold group-hover:from-green-600 group-hover:to-emerald-600 transition">Select Basic</button>
-      </a>
+        <button class="btn btn-green w-full mt-6" onclick="location.href='basic.html'">Select Basic</button>
+      </article>
 
-      <!-- Premium -------------------------------------------------------->
-      <a href="premium.html" class="group block rounded-xl border-2 border-indigo-500/30 hover:border-indigo-500 transition p-6 bg-white shadow-sm">
-        <div class="inline-block px-3 py-1 text-xs font-semibold bg-amber-500 text-white rounded-full -mt-8 mb-2">Most&nbsp;Popular</div>
-        <h3 class="text-center text-2xl font-bold mb-2">Premium</h3>
-        <p class="text-center text-4xl font-extrabold text-indigo-600 mb-4">$99.99</p>
-        <ul class="space-y-2 text-sm mb-6">
-          <li>✓ Up to 5 edit credits included</li>
-          <li>✓ Phone consultation included</li>
-          <li>✓ Enhanced design & styling</li>
+      <!-- Premium Plan -->
+      <article class="plan-card border-indigo-500 relative">
+        <span class="most-popular">Most&nbsp;Popular</span>
+        <h3 class="plan-title">Premium</h3>
+        <p class="plan-price">$99.99</p>
+        <ul class="plan-features">
+          <li>✓ Up to 5 email‑based edits included</li>
+          <li>✓ Phone consultation included</li>
+          <li>✓ Delivered as ZIP + active site link</li>
+          <li>✓ Enhanced design & styling</li>
         </ul>
-        <button class="w-full py-3 rounded bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-semibold group-hover:from-indigo-600 group-hover:to-violet-600 transition">Select Premium</button>
-      </a>
+        <button class="btn btn-indigo w-full mt-6" onclick="location.href='premium.html'">Select Premium</button>
+      </article>
 
-      <!-- Complete / Domain --------------------------------------------->
-      <a href="domain.html" class="group block rounded-xl border-2 border-amber-500/30 hover:border-amber-500 transition p-6 bg-white shadow-sm">
-        <span class="inline-block px-3 py-1 text-xs font-semibold bg-amber-500 text-white rounded-full -mt-8 mb-2">Complete Solution</span>
-        <h3 class="text-center text-2xl font-bold mb-2">Domain + Website</h3>
-        <p class="text-center text-4xl font-extrabold text-indigo-600 mb-4">$499.99</p>
-        <ul class="space-y-2 text-sm mb-6">
-          <li>✓ Custom domain included</li>
-          <li>✓ Premium website design</li>
-          <li>✓ Full hand‑off in 24 hours</li>
+      <!-- Domain + Website Plan -->
+      <article class="plan-card border-yellow-500">
+        <h3 class="plan-title">Domain&nbsp;+&nbsp;Website</h3>
+        <p class="plan-price">$499.99</p>
+        <ul class="plan-features">
+          <li>✓ Custom domain included</li>
+          <li>✓ Premium website design</li>
+          <li>✓ Full hand‑off in 24 hours</li>
         </ul>
-        <button class="w-full py-3 rounded bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold group-hover:from-amber-600 group-hover:to-orange-600 transition">Select Package</button>
-      </a>
+        <button class="btn btn-yellow w-full mt-6" onclick="location.href='domain.html'">Select Package</button>
+      </article>
     </div>
 
-    <!-- Edit credits banner -------------------------------------------->
-    <section class="mt-16 text-center">
-      <p class="mb-4 text-lg font-medium">Need tweaks later? Purchase extra edit credits anytime.</p>
-      <a href="credits.html" class="inline-block px-6 py-3 rounded bg-gradient-to-r from-sky-500 to-cyan-500 text-white font-semibold hover:from-sky-600 hover:to-cyan-600 transition">Buy Edit Credits ($10 each)</a>
-    </section>
+    <!-- Edit credits upsell -->
+    <p class="text-center mt-10 text-sm text-slate-600">
+      Need tweaks later? Purchase extra edit credits anytime. <br/>
+      <a href="credits.html" class="link">Buy Edit Credits ($10 each)</a>
+    </p>
   </main>
 
-  <footer class="py-6 text-center text-xs text-gray-500">© 2025 OneClickSiteBuilder • All rights reserved</footer>
+  <!-- ────────────────── Footer ─────────────────── -->
+  <footer class="site-footer py-6 text-center text-sm text-slate-500">
+    © 2025 OneClickSiteBuilder • All rights reserved
+  </footer>
 </body>
 </html>
