@@ -59,7 +59,7 @@
             </div>
             <div class="pricing-container">
                 <!-- Basic Plan -->
-                <div class="pricing-card basic-card" onclick="selectPlan(\'basic\')">
+                <div class="pricing-card basic-card">
                     <div class="plan-header">
                         <h3 class="plan-name">Basic</h3>
                         <div class="plan-price">$29.99</div>
@@ -69,11 +69,11 @@
                         <li>✓ Delivered as ZIP + active website address + link</li>
                         <li>✓ Perfect for basic business presence</li>
                     </ul>
-                    <button class="btn-plan-select" onclick="selectPlan(\'basic\')">Select Basic</button>
+                    <button class="btn-plan-select" onclick="window.location.href='basic.html'">Select Basic</button>
                 </div>
 
                 <!-- Premium Plan -->
-                <div class="pricing-card premium-card" onclick="selectPlan(\'premium\')">
+                <div class="pricing-card premium-card">
                     <div class="plan-badge">Most Popular</div>
                     <div class="plan-header">
                         <h3 class="plan-name">Premium</h3>
@@ -86,66 +86,41 @@
                         <li>✓ Professional design with images and styling</li>
                         <li>✓ Enhanced visual appeal and functionality</li>
                     </ul>
-                    <button class="btn-plan-select premium" onclick="selectPlan(\'premium\')">Select Premium</button>
+                    <button class="btn-plan-select premium" onclick="window.location.href='premium.html'">Select Premium</button>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- PREMIUM DOMAIN PACKAGE SECTION -->
-    <section id="domain-package" class="domain-package-section">
-        <div class="container">
-            <div class="domain-package-card">
-                <div class="package-badge">🏆 COMPLETE SOLUTION</div>
-                <div class="package-header">
-                    <h2 class="package-title">Premium Domain & Complete Website Package</h2>
-                    <div class="package-price">$499.99</div>
-                    <p class="package-subtitle">All-in-one plug-n-play solution: domain registration, custom build, hosting, deployment, plus 10 edit credits and unlimited phone support.</p>
-                </div>
-                <ul class="package-features">
-                    <li>🌐 We\'ll register and configure a professional domain name for you</li>
-                    <li>🎨 Fully custom website built to your exact specs</li>
-                    <li>✏️ Up to <strong>10 email-based editing credits</strong> included</li>
-                    <li>📞 <strong>Unlimited phone calls</strong> until your site is perfect</li>
-                    <li>🚀 We\'ll deploy to your new domain and set up hosting</li>
-                    <li>⏰ <strong>Please order at least 24 hours in advance</strong> to guarantee launch timing</li>
-                </ul>
-                <button class="btn-package-select" onclick="selectPlan(\'domain\')">Get Started – $499.99</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- EDIT CREDITS UPSELL SECTION -->
-    <section id="edit-credits" class="edit-credits-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Why You\'ll Love Our Edit Credits</h2>
-            </div>
-            <div class="credits-content">
-                <div class="credits-text">
-                    <p class="credits-description">Every site needs tweaks—and our plans come with <strong>free credits included</strong> (Premium: 5 credits, Complete Package: 10 credits), but you\'ll often want a couple extras on hand. At just <strong>$10 each</strong>, these credits let you:</p>
-                    <ul class="credits-benefits">
-                        <li>Shift layouts and swap images</li>
-                        <li>Tweak text and typography</li>
-                        <li>Adjust colors, spacing, or add new sections</li>
-                    </ul>
-                    <p class="credits-recommendation">We recommend <strong>2–3 extra credits</strong> to cover all those \"little\" final touches—without ever worrying about surprise fees.</p>
-                    <button class="btn-credits-select" onclick="selectPlan(\'edit-credits\')">Buy Additional Credits</button>
-                </div>
-                <div class="credits-visual">
-                    <div class="credits-illustration">
-                        <div class="browser-mockup">
-                            <div class="browser-header">
-                                <div class="browser-dots">
-                                    <span></span><span></span><span></span>
-                                </div>
-                            </div>
-                            <div class="browser-content">
-                                <div class="edit-icon">✏️</div>
-                                <div class="price-tag">$10</div>
-                            </div>
-                        </div>
+                <!-- Premium Domain & Complete Website Package -->
+                <div class="pricing-card domain-card">
+                    <div class="plan-badge">🏆 COMPLETE SOLUTION</div>
+                    <div class="plan-header">
+                        <h3 class="plan-name">Premium Domain & Complete Website Package</h3>
+                        <div class="plan-price">$499.99</div>
                     </div>
+                    <ul class="plan-features">
+                        <li>✓ We'll register and configure a professional domain name for you</li>
+                        <li>✓ Fully custom website built to your exact specs</li>
+                        <li>✓ Up to 10 email-based editing credits included</li>
+                        <li>✓ Unlimited phone calls until your site is perfect</li>
+                        <li>✓ We'll deploy to your new domain and set up hosting</li>
+                        <li>✓ Please order at least 24 hours in advance to guarantee launch timing</li>
+                    </ul>
+                    <button class="btn-plan-select domain" onclick="window.location.href='domain.html'">Get Started – $499.99</button>
+                </div>
+
+                <!-- Edit Credits -->
+                <div class="pricing-card credits-card">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Edit Credits</h3>
+                        <div class="plan-price">$10</div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Every site needs tweaks—and our plans come with free credits included (Premium: 5 credits, Complete Package: 10 credits), but you'll often want a couple extras on hand. At just $10 each, these credits let you:</li>
+                        <li>✓ Shift layouts and swap images</li>
+                        <li>✓ Tweak text and typography</li>
+                        <li>✓ Adjust colors, spacing, or add new sections</li>
+                        <li>✓ We recommend 2–3 extra credits to cover all those "little" final touches—without ever worrying about surprise fees.</li>
+                    </ul>
+                    <button class="btn-plan-select credits" onclick="window.location.href='edit-credits.html'">Buy Additional Credits</button>
                 </div>
             </div>
         </div>
@@ -160,7 +135,7 @@
             </div>
             <div class="examples-container">
                 <!-- Basic Example -->
-                <div class="example-card" onclick="selectPlan(\'basic\')">
+                <div class="example-card" onclick="window.location.href='basic.html'">
                     <div class="example-image-container">
                         <img src="images/basic-example-complete.jpg" alt="Basic Website Example" class="example-img">
                         <div class="example-overlay">
@@ -177,7 +152,7 @@
                 </div>
 
                 <!-- Premium Example -->
-                <div class="example-card" onclick="selectPlan(\'premium\')">
+                <div class="example-card" onclick="window.location.href='premium.html'">
                     <div class="example-image-container">
                         <img src="images/premium-example-new.jpg" alt="Premium Website Example" class="example-img">
                         <div class="example-overlay">
@@ -207,7 +182,7 @@
                     <div class="step-number">1</div>
                     <div class="step-icon">🎨</div>
                     <h3 class="step-title">Choose Your Style</h3>
-                    <p class="step-desc">Browse our examples to see what\'s possible.</p>
+                    <p class="step-desc">Browse our examples to see what's possible.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">2</div>
@@ -249,3 +224,8 @@
             <p>&copy; 2025 OneClickSiteBuilder. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
+
