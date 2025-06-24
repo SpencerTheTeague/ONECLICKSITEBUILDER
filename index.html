@@ -1,364 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OneClickSiteBuilder - Professional Websites in 24 Hours</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://js.stripe.com/v3/"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneClickSiteBuilder – Professional Web Solutions</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-    <header class="professional-header">
-        <div class="header-container">
-            <div class="header-left">
-                <div class="logo-section">
-                    <img src="rocket-logo-with-orbit.png" alt="OneClickSiteBuilder Rocket" class="rocket-logo">
-                    <div class="brand-text">
-                        <h1 class="brand-name">OneClickSiteBuilder</h1>
-                        <p class="brand-tagline">Professional Web Solutions</p>
-                    </div>
-                </div>
-            </div>
-            <div class="header-right">
-                <nav class="main-nav">
-                    <div class="tech-badge html nav-tech">HTML</div>
-                    <div class="tech-badge css nav-tech">CSS</div>
-                    <div class="tech-badge js nav-tech">JS</div>
-                </nav>
-            </div>
-        </div>
-    </header>
+<body class="bg-slate-50 text-gray-800">
+  <!-- Site header -------------------------------------------------------->
+  <header class="bg-gradient-to-r from-indigo-700 to-sky-600 shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+      <img src="rocket-logo-with-orbit.png" alt="Logo" class="w-10 h-10" />
+      <div>
+        <h1 class="text-xl font-bold text-white leading-5">OneClickSiteBuilder</h1>
+        <p class="text-xs text-indigo-200 -mt-1">Professional Web Solutions</p>
+      </div>
+    </div>
+  </header>
 
-    <section id="home" class="hero-section">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="badge-text">🚀 Launch Your Business Online</span>
-                </div>
-                <h1 class="hero-title">Custom HTML Websites<br>in 24 Hours - Only <span class="price-highlight">$29.99</span></h1>
-                <p class="hero-subtitle">No coding. No fuss. Perfect for small businesses, portfolios, or personal projects.</p>
-                <div class="hero-buttons">
-                    <a href="#examples" class="btn btn-primary">View Examples</a>
-                    <a href="#pricing" class="btn btn-secondary">Get Started</a>
-                </div>
-            </div>
-            <div class="hero-showcase">
-                <div class="showcase-images">
-                    <img src="perfect-website-1.jpg" alt="Professional Business Website" class="showcase-img showcase-1">
-                    <img src="perfect-website-2.jpg" alt="E-commerce Fashion Website" class="showcase-img showcase-2">
-                    <img src="perfect-website-3.jpg" alt="Tech Startup Website" class="showcase-img showcase-3">
-                </div>
-                <div class="testimonial-quote">
-                    <div class="quote-content">
-                        <p class="quote-text">"OneClickSiteBuilder saved me $3,300 in developer fees and I got my professional website in just 5 hours! The quality is incredible and the process was so simple."</p>
-                        <div class="quote-author">
-                            <strong>Marcus Johnson</strong><br>
-                            <span>Small Business Owner</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Hero / package grid ---------------------------------------------->
+  <main class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-center text-3xl font-extrabold mb-10">Choose Your Package</h2>
 
-    <section id="pricing" class="pricing-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Choose Your Plan</h2>
-                <p class="section-subtitle">Select the perfect package for your website needs</p>
-            </div>
-            <div class="pricing-container">
-                <div class="pricing-card basic-card" onclick="selectPlan('basic')">
-                    <div class="plan-header">
-                        <h3 class="plan-name">Basic</h3>
-                        <div class="plan-price">$29.99</div>
-                    </div>
-                    <ul class="plan-features">
-                        <li>✓ 2 free edits included</li>
-                        <li>✓ Delivered as ZIP + active website address + link</li>
-                        <li>✓ Perfect for basic business presence</li>
-                    </ul>
-                    <button class="btn-plan-select" onclick="selectPlan('basic')">Select Basic</button>
-                </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Basic ---------------------------------------------------------->
+      <a href="basic.html" class="group block rounded-xl border-2 border-green-500/30 hover:border-green-500 transition p-6 bg-white shadow-sm">
+        <h3 class="text-center text-2xl font-bold mb-2">Basic</h3>
+        <p class="text-center text-4xl font-extrabold text-indigo-600 mb-4">$29.99</p>
+        <ul class="space-y-2 text-sm mb-6">
+          <li>✓ 2 free edits included</li>
+          <li>✓ Delivered as ZIP + active site link</li>
+          <li>✓ Perfect for a basic business presence</li>
+        </ul>
+        <button class="w-full py-3 rounded bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold group-hover:from-green-600 group-hover:to-emerald-600 transition">Select Basic</button>
+      </a>
 
-                <div class="pricing-card premium-card" onclick="selectPlan('premium')">
-                    <div class="plan-badge">Most Popular</div>
-                    <div class="plan-header">
-                        <h3 class="plan-name">Premium</h3>
-                        <div class="plan-price">$99.99</div>
-                    </div>
-                    <ul class="plan-features">
-                        <li>✓ Up to 5 email-based edits included</li>
-                        <li>✓ Phone consultation included</li>
-                        <li>✓ Delivered as ZIP + active website address + link</li>
-                        <li>✓ Professional design with images and styling</li>
-                        <li>✓ Enhanced visual appeal and functionality</li>
-                    </ul>
-                    <button class="btn-plan-select premium" onclick="selectPlan('premium')">Select Premium</button>
-                </div>
-            </div>
-        </div>
-    </section>
+      <!-- Premium -------------------------------------------------------->
+      <a href="premium.html" class="group block rounded-xl border-2 border-indigo-500/30 hover:border-indigo-500 transition p-6 bg-white shadow-sm">
+        <div class="inline-block px-3 py-1 text-xs font-semibold bg-amber-500 text-white rounded-full -mt-8 mb-2">Most&nbsp;Popular</div>
+        <h3 class="text-center text-2xl font-bold mb-2">Premium</h3>
+        <p class="text-center text-4xl font-extrabold text-indigo-600 mb-4">$99.99</p>
+        <ul class="space-y-2 text-sm mb-6">
+          <li>✓ Up to 5 edit credits included</li>
+          <li>✓ Phone consultation included</li>
+          <li>✓ Enhanced design & styling</li>
+        </ul>
+        <button class="w-full py-3 rounded bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-semibold group-hover:from-indigo-600 group-hover:to-violet-600 transition">Select Premium</button>
+      </a>
 
-    <!-- PREMIUM DOMAIN PACKAGE SECTION -->
-    <section id="domain-package" class="domain-package-section">
-        <div class="container">
-            <div class="domain-package-card">
-                <div class="package-badge">🏆 COMPLETE SOLUTION</div>
-                <div class="package-header">
-                    <h2 class="package-title">Premium Domain & Complete Website Package</h2>
-                    <div class="package-price">$499.99</div>
-                    <p class="package-subtitle">All-in-one plug-n-play solution: domain registration, custom build, hosting, deployment, plus 10 edit credits and unlimited phone support.</p>
-                </div>
-                <ul class="package-features">
-                    <li>🌐 We'll register and configure a professional domain name for you</li>
-                    <li>🎨 Fully custom website built to your exact specs</li>
-                    <li>✏️ Up to <strong>10 email-based editing credits</strong> included</li>
-                    <li>📞 <strong>Unlimited phone calls</strong> until your site is perfect</li>
-                    <li>🚀 We'll deploy to your new domain and set up hosting</li>
-                    <li>⏰ <strong>Please order at least 24 hours in advance</strong> to guarantee launch timing</li>
-                </ul>
-                <button class="btn-package-select" onclick="selectDomainPackage()">Get Started – $499.99</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- EDIT CREDITS UPSELL SECTION -->
-    <section id="edit-credits" class="edit-credits-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Why You'll Love Our Edit Credits</h2>
-            </div>
-            <div class="credits-content">
-                <div class="credits-text">
-                    <p class="credits-description">Every site needs tweaks—and our plans come with <strong>free credits included</strong> (Premium: 5 credits, Complete Package: 10 credits), but you'll often want a couple extras on hand. At just <strong>$10 each</strong>, these credits let you:</p>
-                    <ul class="credits-benefits">
-                        <li>Shift layouts and swap images</li>
-                        <li>Tweak text and typography</li>
-                        <li>Adjust colors, spacing, or add new sections</li>
-                    </ul>
-                    <p class="credits-recommendation">We recommend <strong>2–3 extra credits</strong> to cover all those "little" final touches—without ever worrying about surprise fees.</p>
-                    <button class="btn-credits-select" onclick="purchaseEditCredits()">Buy Additional Credits</button>
-                </div>
-                <div class="credits-visual">
-                    <div class="credits-illustration">
-                        <div class="browser-mockup">
-                            <div class="browser-header">
-                                <div class="browser-dots">
-                                    <span></span><span></span><span></span>
-                                </div>
-                            </div>
-                            <div class="browser-content">
-                                <div class="edit-icon">✏️</div>
-                                <div class="price-tag">$10</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="examples" class="examples-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Website Options</h2>
-                <p class="section-subtitle">Professional websites that convert visitors into customers</p>
-            </div>
-            <div class="examples-container">
-                <div class="example-card" onclick="selectPlan('basic')">
-                    <div class="example-image-container">
-                        <img src="basic-example-complete.jpg" alt="Basic Website Example" class="example-img">
-                        <div class="example-overlay">
-                            <div class="tier-label-box">
-                                <div class="spinning-square basic-square"></div>
-                                <span class="tier-label">Basic</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Basic Business Website</h3>
-                        <p class="example-desc">A complete business website with professional header navigation, welcome message, and clear call-to-action.</p>
-                    </div>
-                </div>
-
-                <div class="example-card" onclick="selectPlan('premium')">
-                    <div class="example-image-container">
-                        <img src="premium-example-new.jpg" alt="Premium Website Example" class="example-img">
-                        <div class="example-overlay">
-                            <div class="tier-label-box">
-                                <div class="spinning-square premium-square"></div>
-                                <span class="tier-label">Premium</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Premium Business Website</h3>
-                        <p class="example-desc">A modern website with professional images, styled sections, and enhanced visual appeal.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="how-it-works" class="how-it-works-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" style="color: #FF8C00 !important; background-color: yellow; padding: 20px; text-align: center; margin-bottom: 50px;">How It Works</h2>
-            </div>
-            <div class="steps-container">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <div class="step-icon">🎨</div>
-                    <h3 class="step-title">Choose Your Style</h3>
-                    <p class="step-desc">Browse our examples to see what's possible.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <div class="step-icon">📝</div>
-                    <h3 class="step-title">Answer a Few Questions</h3>
-                    <p class="step-desc">Tell us exactly what you need—pages, colors, logo, images.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <div class="step-icon">👁️</div>
-                    <h3 class="step-title">Review & Approve</h3>
-                    <p class="step-desc">We build your site in Manus and send a preview link.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <div class="step-icon">⬇️</div>
-                    <div class="step-title">Download & Launch</div>
-                    <p class="step-desc">Download the ZIP and launch the site on your domain.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Questions?</h2>
-            <p>Email us at <a href="mailto:admin@oneclicksitebuilder.com">admin@oneclicksitebuilder.com</a> or fill out the form above to place an order.</p>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms of Service</a>
-            </div>
-            <p>&copy; 2025 OneClickSiteBuilder. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- MODALS -->
-    <!-- Domain Package Checkout Modal -->
-    <div id="domainPackageModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeDomainPackageModal()">&times;</span>
-            <h2>Premium Domain & Complete Website Package</h2>
-            <form id="domainPackageForm">
-                <div class="form-group">
-                    <label for="customerName">Full Name *</label>
-                    <input type="text" id="customerName" name="customerName" required>
-                </div>
-                <div class="form-group">
-                    <label for="customerEmail">Email Address *</label>
-                    <input type="email" id="customerEmail" name="customerEmail" required>
-                </div>
-                <div class="form-group">
-                    <label for="customerPhone">Phone Number *</label>
-                    <input type="tel" id="customerPhone" name="customerPhone" required>
-                </div>
-                <div class="form-group">
-                    <label for="preferredDomain">Preferred Domain Name *</label>
-                    <div class="domain-input-group">
-                        <input type="text" id="preferredDomain" name="preferredDomain" placeholder="yourbusiness" required>
-                        <select id="domainExtension" name="domainExtension">
-                            <option value=".com">.com</option>
-                            <option value=".net">.net</option>
-                            <option value=".org">.org</option>
-                            <option value=".biz">.biz</option>
-                        </select>
-                        <button type="button" id="checkDomainBtn" onclick="checkDomainAvailability()">Check</button>
-                    </div>
-                    <div id="domainStatus" class="domain-status"></div>
-                </div>
-                <div class="form-group">
-                    <label for="additionalCredits">Additional Edit Credits (Optional)</label>
-                    <select id="additionalCredits" name="additionalCredits">
-                        <option value="0">0 credits (10 included)</option>
-                        <option value="1">1 credit (+$10)</option>
-                        <option value="2" selected>2 credits (+$20) - Recommended</option>
-                        <option value="3">3 credits (+$30)</option>
-                        <option value="5">5 credits (+$50)</option>
-                        <option value="10">10 credits (+$100)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="websiteDescription">Website Description *</label>
-                    <textarea id="websiteDescription" name="websiteDescription" rows="4" placeholder="Describe your business and what you want your website to accomplish..." required></textarea>
-                </div>
-                <div class="total-price">
-                    <strong>Total: $<span id="domainPackageTotal">499.99</span></strong>
-                </div>
-                <button type="submit" class="btn-checkout">Proceed to Payment</button>
-            </form>
-        </div>
+      <!-- Complete / Domain --------------------------------------------->
+      <a href="domain.html" class="group block rounded-xl border-2 border-amber-500/30 hover:border-amber-500 transition p-6 bg-white shadow-sm">
+        <span class="inline-block px-3 py-1 text-xs font-semibold bg-amber-500 text-white rounded-full -mt-8 mb-2">Complete Solution</span>
+        <h3 class="text-center text-2xl font-bold mb-2">Domain + Website</h3>
+        <p class="text-center text-4xl font-extrabold text-indigo-600 mb-4">$499.99</p>
+        <ul class="space-y-2 text-sm mb-6">
+          <li>✓ Custom domain included</li>
+          <li>✓ Premium website design</li>
+          <li>✓ Full hand‑off in 24 hours</li>
+        </ul>
+        <button class="w-full py-3 rounded bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold group-hover:from-amber-600 group-hover:to-orange-600 transition">Select Package</button>
+      </a>
     </div>
 
-    <!-- Credits Only Modal -->
-    <div id="creditsModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeCreditsModal()">&times;</span>
-            <h2>Buy Additional Edit Credits</h2>
-            <form id="creditsForm">
-                <div class="form-group">
-                    <label for="creditsCustomerName">Full Name *</label>
-                    <input type="text" id="creditsCustomerName" name="customerName" required>
-                </div>
-                <div class="form-group">
-                    <label for="creditsCustomerEmail">Email Address *</label>
-                    <input type="email" id="creditsCustomerEmail" name="customerEmail" required>
-                </div>
-                <div class="form-group">
-                    <label for="creditsCustomerPhone">Phone Number *</label>
-                    <input type="tel" id="creditsCustomerPhone" name="customerPhone" required>
-                </div>
-                <div class="form-group">
-                    <label for="creditsQuantity">Number of Credits *</label>
-                    <select id="creditsQuantity" name="creditsQuantity" onchange="updateCreditsTotal()">
-                        <option value="1">1 credit - $10</option>
-                        <option value="2" selected>2 credits - $20</option>
-                        <option value="3">3 credits - $30</option>
-                        <option value="5">5 credits - $50</option>
-                        <option value="10">10 credits - $100</option>
-                    </select>
-                </div>
-                <div class="total-price">
-                    <strong>Total: $<span id="creditsTotal">20.00</span></strong>
-                </div>
-                <button type="submit" class="btn-checkout">Proceed to Payment</button>
-            </form>
-        </div>
-    </div>
+    <!-- Edit credits banner -------------------------------------------->
+    <section class="mt-16 text-center">
+      <p class="mb-4 text-lg font-medium">Need tweaks later? Purchase extra edit credits anytime.</p>
+      <a href="credits.html" class="inline-block px-6 py-3 rounded bg-gradient-to-r from-sky-500 to-cyan-500 text-white font-semibold hover:from-sky-600 hover:to-cyan-600 transition">Buy Edit Credits ($10 each)</a>
+    </section>
+  </main>
 
-    <!-- No Credits Warning Modal -->
-    <div id="noCreditsWarningModal" class="modal">
-        <div class="modal-content warning-modal">
-            <h2>Hold on—almost every site needs tweaks.</h2>
-            <p>We strongly recommend at least <strong>2 edit credits</strong> so your AI-built site looks exactly how you want.</p>
-            <p>Are you sure you want to continue without any extras?</p>
-            <div class="warning-buttons">
-                <button class="btn-warning-continue" onclick="proceedWithoutCredits()">Yes, continue</button>
-                <button class="btn-warning-add" onclick="addRecommendedCredits()">Add 2 credits</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+  <footer class="py-6 text-center text-xs text-gray-500">© 2025 OneClickSiteBuilder • All rights reserved</footer>
 </body>
 </html>
-
