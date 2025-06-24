@@ -2,37 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Basic Website Package – OneClickSiteBuilder</title>
-  <link rel="stylesheet" href="styles.css" />
-  <!-- Load Stripe’s Buy-Button library -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Basic Website Package – $29.99</title>
+  <link rel="stylesheet" href="css/styles.css" />
   <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <h1>OneClickSiteBuilder</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="basic.html" class="active">Basic</a>
-      <a href="premium.html">Premium</a>
-      <a href="domain.html">Domain</a>
-      <a href="credits.html">Edit Credits</a>
-    </nav>
-  </header>
-
   <main class="plan-page">
-    <h2>Basic Website Package</h2>
-    <p>Get a professional website built for you—for just <strong>$29.99</strong>.</p>
-    
-    <!-- Your Basic-Tier Buy Button -->
+    <h1>Basic Website Package – $29.99</h1>
+    <p>Perfect for a simple online presence. Includes 2 free edits.</p>
+
+    <!-- Stripe Buy Button -->
     <stripe-buy-button
       buy-button-id="buy_btn_1RdJgURvugzB60pNfhyunIhp"
-      publishable-key="pk_live_51RY9PVRvugzB60pNk0vkzEWmNxPLho26Bdzpyw9H50Jw9rHxNXytfLBKw9h8G7GoxVq3Vrtmv43fg51SD6tYNPGg00cDpygKKM"
-    ></stripe-buy-button>
-  </main>
+      publishable-key="pk_live_51RY9PVRvugzB60pNk0vkzEWmNxPLho26Bdzpyw9H50Jw9rHxNXytfLBKw9h8G7GoxVq3Vrtmv43fg51SD6tYNPGg00cDpygKKM">
+    </stripe-buy-button>
 
-  <footer class="site-footer">
-    <p>&copy; 2025 OneClickSiteBuilder. All rights reserved.</p>
-  </footer>
+    <p><a href="index.html">← Back to main page</a></p>
+  </main>
 </body>
 </html>
