@@ -425,12 +425,13 @@
                         // Add all other form data for basic/premium/domain plans
                         for (const key in orderData) {
                             if (orderData.hasOwnProperty(key) && key !== 'paymentMethod' && key !== 'customerName' && key !== 'customerEmail' && key !== 'customerPhone' && key !== 'paymentCompleted' && key !== 'orderDate') {
-                                emailBody += `${key.charAt(0).toUpperCase() + key.slice(1)}: ${orderData[key]}\n`;
+                                emailBody += `${key}: ${orderData[key]}\n`;
                             }
                         }
                     }
 
-                    await fetch(formspreeEndpoint, {
+                    // Send email via Formspree
+                    const formspreeResponse = await fetch(formspreeEndpoint, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -438,29 +439,30 @@
                         },
                         body: JSON.stringify({
                             _subject: emailSubject,
-                            message: emailBody
+                            emailBody: emailBody
                         })
                     });
 
-                    // Redirect to success page
-                    window.location.href = 'success.html';
+                    if (formspreeResponse.ok) {
+                        alert('Payment successful and order submitted! You will receive a confirmation email shortly.');
+                        localStorage.clear(); // Clear local storage after successful order
+                        window.location.href = 'success.html'; // Redirect to a success page
+                    } else {
+                        alert('Payment successful, but there was an issue submitting your order details. Please contact support.');
+                    }
                 } else {
-                    // Handle other payment statuses (e.g., 'requires_action')
-                    document.getElementById('card-errors').textContent = 'Payment ' + paymentIntent.status;
-                    submitButton.disabled = false;
-                    loading.style.display = 'none';
+                    alert('Payment failed: ' + paymentIntent.status);
                 }
-
-            } catch (err) {
-                console.error('Payment error:', err);
-                document.getElementById('card-errors').textContent = 'An error occurred processing your payment. Please try again.';
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('card-errors').textContent = 'An unexpected error occurred.';
                 submitButton.disabled = false;
                 loading.style.display = 'none';
             }
         });
         
-        // Load order data when page loads
-        document.addEventListener('DOMContentLoaded', loadOrderData);
+        // Initial load of order data
+        loadOrderData();
     </script>
 </body>
 </html>
